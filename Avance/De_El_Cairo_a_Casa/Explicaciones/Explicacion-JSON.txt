@@ -1,0 +1,96 @@
+Explicación completa de productos.json
+
+Este documento explica el archivo productos.json, que almacena el catálogo de productos disponibles en la tienda "De El Cairo a Casa". Este archivo es utilizado por script.js para cargar y mostrar dinámicamente los productos.
+
+✅ ¿Qué es JSON?
+
+JSON (JavaScript Object Notation) es un formato ligero de intercambio de datos. Es muy usado para transmitir información estructurada entre un servidor (o archivo local, en este caso) y una aplicación web.
+
+✅ Estructura general del archivo
+
+[
+  {
+    "nombre": "Mini Pirámide Dorada",
+    "descripcion": "Réplica decorativa en color dorado, ideal como recuerdo.",
+    "precio": 8.5,
+    "imagen": "img/piramide.jpg",
+    "novedad": true
+  },
+  {
+    "nombre": "Escarabajo Egipcio",
+    "descripcion": "Amuleto tradicional egipcio de la buena suerte.",
+    "precio": 6.0,
+    "imagen": "img/escarabajo.jpg",
+    "novedad": false
+  }
+]
+
+Se trata de un array de objetos.
+
+Cada objeto representa un producto con propiedades.
+
+✅ Propiedades de cada producto
+
+{
+  "nombre": "Mini Pirámide Dorada",
+  "descripcion": "Réplica decorativa en color dorado, ideal como recuerdo.",
+  "precio": 8.5,
+  "imagen": "img/piramide.jpg",
+  "novedad": true
+}
+
+nombre: título del producto que se mostrará en la tarjeta.
+
+descripcion: pequeño texto que describe el producto.
+
+precio: valor numérico (decimal) usado para cálculo y visualización.
+
+imagen: ruta a la imagen del producto dentro de la carpeta img.
+
+novedad: booleano que indica si debe mostrarse también en la sección de novedades (true o false).
+
+✅ ¿Cómo se usa desde JavaScript?
+
+El archivo se carga dinámicamente en script.js:
+
+fetch('data/productos.json')
+  .then(res => res.json())
+  .then(data => mostrarProductos(data));
+
+fetch carga el archivo.
+
+.json() convierte el contenido a un array de objetos.
+
+mostrarProductos(data) recorre y pinta los productos en pantalla.
+
+✅ Beneficios de usar JSON
+
+Facilita separar la lógica del contenido.
+
+Permite actualizar productos sin tocar el código JS o HTML.
+
+Se puede reutilizar si en el futuro se construye una API real.
+
+✅ Ejemplo adicional de producto
+
+{
+  "nombre": "Máscara de Tutankamón",
+  "descripcion": "Mini réplica con detalles dorados y azules.",
+  "precio": 12.0,
+  "imagen": "img/mask.jpg",
+  "novedad": true
+}
+
+Puedes añadir tantos productos como desees.
+
+Basta con agregar más objetos al array, respetando la estructura.
+
+✅ Recomendaciones
+
+Asegúrate de que las rutas de imagen sean correctas.
+
+Todos los productos deben estar separados por comas, excepto el último.
+
+No uses comillas simples (') en JSON, solo comillas dobles (").
+
+

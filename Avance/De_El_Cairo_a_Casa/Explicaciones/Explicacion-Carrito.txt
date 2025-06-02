@@ -1,0 +1,117 @@
+Explicación completa de carrito.html
+
+Este documento explica en detalle el archivo carrito.html, que muestra los productos añadidos al carrito de compras en la tienda "De El Cairo a Casa". Su contenido se genera principalmente mediante JavaScript, y su estructura es simple pero funcional.
+
+✅ Estructura básica del HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi carrito</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+Carga Bootstrap y los estilos personalizados.
+
+Define el título de la página como "Mi carrito".
+
+✅ Contenedor principal del carrito
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Carrito de Compras</h1>
+  <div id="carrito-lista" class="row g-4"></div>
+  <div class="mt-4 text-end">
+    <h4>Total: <span id="total-carrito">0</span> €</h4>
+    <button id="vaciar-carrito" class="btn btn-danger me-2">Vaciar carrito</button>
+    <button id="finalizar-compra" class="btn btn-success">Finalizar compra</button>
+  </div>
+</div>
+
+#carrito-lista: aquí se insertan los productos usando JavaScript.
+
+Los botones permiten vaciar el carrito o finalizar la compra.
+
+text-end: alinea los elementos a la derecha.
+
+✅ Estructura generada dinámicamente con JavaScript
+
+Ejemplo de bloque insertado por JS:
+
+<div class="col-md-4">
+  <div class="card h-100">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Nombre</h5>
+      <p class="card-text">Precio</p>
+    </div>
+  </div>
+</div>
+
+Cada producto añadido al carrito se representa con una tarjeta Bootstrap (card).
+
+Se colocan en una cuadrícula (row) responsiva gracias a Bootstrap (col-md-4).
+
+✅ Scripts al final del documento
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Carga productos del carrito y los muestra
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const contenedor = document.getElementById('carrito-lista');
+  const total = document.getElementById('total-carrito');
+  let suma = 0;
+
+  carrito.forEach(prod => {
+    const div = document.createElement('div');
+    div.className = 'col-md-4';
+    div.innerHTML = `
+      <div class="card h-100">
+        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}">
+        <div class="card-body">
+          <h5 class="card-title">${prod.nombre}</h5>
+          <p class="card-text">${prod.precio}</p>
+        </div>
+      </div>
+    `;
+    contenedor.appendChild(div);
+    suma += parseFloat(prod.precio);
+  });
+
+  total.textContent = suma.toFixed(2);
+
+  document.getElementById('vaciar-carrito').addEventListener('click', () => {
+    localStorage.removeItem('carrito');
+    location.reload();
+  });
+
+  document.getElementById('finalizar-compra').addEventListener('click', () => {
+    alert('Gracias por tu compra. ¡Disfruta tus recuerdos de El Cairo!');
+    localStorage.removeItem('carrito');
+    location.href = 'index.html';
+  });
+</script>
+</body>
+</html>
+
+Carga y renderiza los productos guardados en localStorage bajo la clave carrito.
+
+Muestra nombre, imagen y precio de cada producto.
+
+Calcula el total de la compra.
+
+Permite vaciar el carrito o finalizar la compra con alertas y redirección.
+
+✅ Resumen general
+
+carrito.html es una página auxiliar para ver lo seleccionado en la tienda.
+
+No tiene estructura complicada, se apoya en Bootstrap y en localStorage.
+
+Es generado dinámicamente por JavaScript.
+
+Aporta al proyecto una funcionalidad realista para simular un flujo de compra.
+

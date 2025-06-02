@@ -1,0 +1,128 @@
+Explicación completa de style.css
+
+Este documento explica cada una de las reglas del archivo style.css, el cual personaliza la apariencia del proyecto "De El Cairo a Casa". Se complementa a Bootstrap con estilos específicos para el fondo, el logo, los productos y más.
+
+✅ Fondo de la página
+
+body {
+  background-image: url('../img/Fondo-pagina.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+Se aplica una imagen de fondo general a toda la página.
+
+cover: cubre toda el área visible del navegador.
+
+fixed: el fondo no se desplaza al hacer scroll.
+
+center: centra la imagen en la pantalla.
+
+✅ Logo en la barra de navegación
+
+.logo-navbar {
+  height: 40px;
+}
+
+Define una altura fija para el logo en la navbar.
+
+Se asegura que el logo no desborde ni distorsione la barra.
+
+✅ Estilo de tarjetas de productos
+
+.card {
+  scroll-snap-align: start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+Cada tarjeta se alinea dentro del carrusel con scroll-snap-align.
+
+Se aplica un efecto al pasar el ratón: escala suave y sombra.
+
+Esto mejora la sensación de interactividad.
+
+✅ Contenedor de productos como carrusel horizontal
+
+#lista-productos {
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+Se crea un carrusel de desplazamiento horizontal.
+
+scroll-snap-type: activa el centrado suave de los elementos.
+
+display: flex + gap: coloca las tarjetas una tras otra con espacio entre ellas.
+
+overflow-x: auto: permite que se pueda hacer scroll lateral.
+
+✅ Ajustes de z-index para evitar que elementos tapen modales
+
+.modal-backdrop {
+  z-index: 1040;
+}
+
+.modal {
+  z-index: 1050;
+}
+
+Asegura que los modales estén por encima del fondo.
+
+modal-backdrop es la capa oscura detrás.
+
+modal es la ventana flotante.
+
+✅ Botón de usuario logueado (si se ha personalizado)
+
+#usuario-logueado {
+  cursor: pointer;
+}
+
+Asegura que el puntero se vea como "mano" cuando se pasa por encima del nombre del usuario.
+
+✅ Footer
+
+(Estilos opcionales si se incluyeron)
+
+footer a {
+  color: #ffffff;
+  text-decoration: underline;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  color: #ccc;
+  text-decoration: none;
+}
+
+Se aplica color blanco a los enlaces del footer.
+
+text-decoration: underline los resalta.
+
+Al pasar el ratón, se aclaran y desaparece el subrayado.
+
+✅ Resumen
+
+El style.css mejora la estética de la tienda con toques suaves como:
+
+Fondo temático fijo
+
+Logo proporcionado
+
+Interactividad en tarjetas de productos
+
+Carrusel funcional con scroll lateral
+
+Integración visual de modales y footer
+
+Estos estilos permiten una personalización sin complicar el diseño gracias al soporte de Bootstrap.

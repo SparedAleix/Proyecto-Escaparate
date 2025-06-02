@@ -1,0 +1,71 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('../img/Fondo-pagina.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #fdfcf9;
+}
+
+.logo-navbar {
+  height: 100px;
+  width: auto;
+}
+
+nav .navbar-brand {
+  font-weight: bold;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+#lista-productos {
+  scroll-snap-type: x mandatory;
+}
+
+#lista-productos .card {
+  min-width: 250px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+footer {
+  font-size: 0.9rem;
+}
+
+#cookie-banner {
+  display: none;
+  z-index: 9999;
+}
+
+.modal-content {
+  border: 2px solid #b98b2f;
+}
+
+.btn-primary {
+  background-color: #b98b2f;
+  border-color: #b98b2f;
+}
+
+.btn-primary:hover {
+  background-color: #a27628;
+  border-color: #a27628;
+}
+
+.badge.bg-danger {
+  font-size: 0.75rem;
+  vertical-align: text-top;
+}

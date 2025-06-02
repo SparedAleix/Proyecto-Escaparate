@@ -1,0 +1,72 @@
+[
+  {
+    "nombre": "Mini Pirámide Dorada",
+    "descripcion": "Réplica decorativa de una pirámide de Giza en color dorado.",
+    "precio": 8.50,
+    "imagen": "img/piramide.jpg",
+    "novedad": true
+  },
+  {
+    "nombre": "Estatua de Tutankamón",
+    "descripcion": "Figura del faraón Tutankamón con detalles en azul y oro.",
+    "precio": 12.00,
+    "imagen": "img/tutankamon.jpg",
+    "novedad": true
+  },
+  {
+    "nombre": "Papiro Egipcio Auténtico",
+    "descripcion": "Lámina de papiro con escritura jeroglífica y escenas mitológicas.",
+    "precio": 15.00,
+    "imagen": "img/papiro.jpg",
+    "novedad": false
+  },
+  {
+    "nombre": "Camello de Peluche",
+    "descripcion": "Peluche suave de camello, ideal para niños y adultos.",
+    "precio": 9.00,
+    "imagen": "img/camello.jpg",
+    "novedad": false
+  },
+  {
+    "nombre": "Colgante Ojo de Horus",
+    "descripcion": "Amuleto protector con forma del Ojo de Horus en metal dorado.",
+    "precio": 6.75,
+    "imagen": "img/ojo_horus.jpg",
+    "novedad": true
+  },
+  {
+    "nombre": "Pulsera Egipcia de Cuero",
+    "descripcion": "Pulsera artesanal con símbolos jeroglíficos grabados.",
+    "precio": 7.00,
+    "imagen": "img/pulsera.jpg",
+    "novedad": false
+  },
+  {
+    "nombre": "Llavero de Anubis",
+    "descripcion": "Llavero metálico con figura del dios Anubis.",
+    "precio": 4.50,
+    "imagen": "img/llavero_anubis.jpg",
+    "novedad": false
+  },
+  {
+    "nombre": "Caja Decorativa Faraónica",
+    "descripcion": "Pequeña caja para joyas con diseño de faraones.",
+    "precio": 11.25,
+    "imagen": "img/caja_faraon.jpg",
+    "novedad": true
+  },
+  {
+    "nombre": "Imán de Frigorífico de Nefertiti",
+    "descripcion": "Imán con retrato clásico de la reina Nefertiti.",
+    "precio": 3.00,
+    "imagen": "img/iman_nefertiti.jpg",
+    "novedad": false
+  },
+  {
+    "nombre": "Camiseta El Cairo",
+    "descripcion": "Camiseta blanca con ilustración de las pirámides.",
+    "precio": 14.90,
+    "imagen": "img/camiseta_piramides.jpg",
+    "novedad": true
+  }
+]

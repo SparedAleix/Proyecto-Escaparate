@@ -1,0 +1,14 @@
+--> Título del escaparate: De El Cairo a Casa.
+
+--> Descripción de la temática:
+
+	Es una web dedicada a la venta de abalorios y otros recuerdos
+	que pueda conseguir todo turista que visite la ciudad de El Cairo
+	durante su visita a Egipto.
+
+--> Significado del logo:
+
+	Representa, grosso modo, algunos elementos típicos de la cultura Egipcia,
+	sobre todo lo que tiene que ver con la ciudad de El Cairo. Por ejemplo, te
+	nemos la Luna Gibosa Creciente que representa a la diosa Khonsu, también
+	podemos encontrar dos de las tres pirámides principales así cómo la Esfinge.

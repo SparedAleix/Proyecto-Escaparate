@@ -1,0 +1,196 @@
+Explicación completa de script.js
+
+Este documento explica línea por línea y bloque por bloque el archivo script.js, que se encarga de la lógica y funcionalidades de la tienda web "De El Cairo a Casa".
+
+✅ Sección: Cookies
+
+window.addEventListener('load', () => {
+  if (!localStorage.getItem('cookiesAceptadas')) {
+    document.getElementById('cookie-banner').style.display = 'block';
+  }
+  document.getElementById('accept-cookies').addEventListener('click', () => {
+    localStorage.setItem('cookiesAceptadas', 'true');
+    document.getElementById('cookie-banner').style.display = 'none';
+  });
+});
+
+Al cargar la página (window.load), se comprueba si el usuario aceptó las cookies.
+
+Si no lo hizo, se muestra el banner inferior.
+
+Al pulsar "Aceptar", se guarda un valor en localStorage y se oculta el banner.
+
+✅ Sección: Login con verificación de usuario registrado
+
+const formLogin = document.getElementById('form-login');
+formLogin?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const usuario = document.getElementById('usuario').value;
+  const clave = document.getElementById('clave').value;
+
+  const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+  const coincide = usuarios.find(u => u.nombre === usuario && u.clave === clave);
+
+  if (!coincide) {
+    alert('Usuario o contraseña incorrectos.');
+    return;
+  }
+
+  localStorage.setItem('usuario', usuario);
+  alert('Sesión iniciada');
+  document.querySelector('#modalLogin .btn-close')?.click();
+  mostrarUsuarioLogueado();
+});
+
+Captura el formulario de login y escucha su envío.
+
+Obtiene los valores ingresados por el usuario.
+
+Carga los usuarios registrados desde localStorage.
+
+Busca si existe un usuario con ese nombre y contraseña.
+
+Si no lo encuentra, lanza alerta. Si coincide, guarda el nombre en localStorage y oculta el modal.
+
+✅ Sección: Registro de usuarios con validación y almacenamiento
+
+formRegistro?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const nuevoUsuario = document.getElementById('nuevoUsuario').value;
+  const nuevaClave = document.getElementById('nuevaClave').value;
+
+  const regexUsuario = /^[a-zA-Z0-9]{4,12}$/;
+  const regexClave = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/;
+
+Captura el formulario de registro.
+
+Valida que el usuario tenga entre 4 y 12 caracteres alfanuméricos.
+
+Valida que la contraseña tenga mínimo 6 caracteres, incluyendo letras y números.
+
+  let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+  const existe = usuarios.find(u => u.nombre === nuevoUsuario);
+  if (existe) {
+    alert('Ese usuario ya está registrado.');
+    return;
+  }
+
+Si el nombre ya está registrado, muestra alerta.
+
+Si no, guarda el nuevo usuario en el array usuarios y lo escribe en localStorage.
+
+✅ Sección: Mostrar nombre de usuario logueado
+
+function mostrarUsuarioLogueado() {
+  const usuario = localStorage.getItem('usuario');
+  const btnLogin = document.getElementById('btn-login');
+  const usuarioBtn = document.getElementById('usuario-logueado');
+
+  if (usuario) {
+    btnLogin.style.display = 'none';
+    usuarioBtn.textContent = usuario;
+    usuarioBtn.classList.remove('d-none');
+    usuarioBtn.addEventListener('click', () => {
+      document.getElementById('nombre-usuario-perfil').textContent = usuario;
+      const perfilModal = new bootstrap.Modal(document.getElementById('modalPerfil'));
+      perfilModal.show();
+    });
+  }
+}
+
+Muestra el nombre del usuario en la barra si está logueado.
+
+Oculta el botón de "Iniciar sesión".
+
+Al hacer clic en el nombre, abre el modal de perfil.
+
+function cerrarSesion() {
+  localStorage.removeItem('usuario');
+  location.reload();
+}
+
+Borra la sesión del usuario y recarga la página.
+
+✅ Sección: Contador del carrito
+
+function actualizarContadorCarrito() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const contador = document.getElementById('contador-carrito');
+  if (contador) contador.textContent = carrito.length;
+}
+
+Cuenta la cantidad de productos en el carrito y actualiza el número en el icono.
+
+✅ Sección: Carga de productos desde productos.json
+
+fetch('data/productos.json')
+  .then(res => res.json())
+  .then(data => mostrarProductos(data));
+
+Lee el archivo JSON y pasa los datos a la función que crea los productos visualmente.
+
+✅ Sección: Mostrar productos
+
+function mostrarProductos(productos) {
+  const contenedor = document.getElementById('lista-productos');
+  const novedades = document.getElementById('lista-novedades');
+  contenedor.innerHTML = '';
+  novedades.innerHTML = '';
+
+Limpia las secciones para evitar duplicados.
+
+Por cada producto crea una tarjeta card con su información.
+
+Si el producto es novedad (novedad: true), lo clona a la sección de novedades.
+
+Al pulsar “Añadir al carrito”, verifica si hay sesión iniciada, guarda el producto y actualiza el contador.
+
+✅ Sección: Buscador
+
+buscador?.addEventListener('input', () => {
+  const valor = buscador.value.toLowerCase();
+  document.querySelectorAll('.producto').forEach(card => {
+    const nombre = card.getAttribute('data-nombre');
+    card.style.display = nombre.includes(valor) ? '' : 'none';
+  });
+});
+
+Escucha lo que se escribe en el buscador y filtra los productos dinámicamente.
+
+✅ Sección: Reconocimiento de voz
+
+const btnVoz = document.getElementById('btn-voz');
+if ('webkitSpeechRecognition' in window && btnVoz) {
+  const reconocimiento = new webkitSpeechRecognition();
+  reconocimiento.lang = 'es-ES';
+
+  btnVoz.addEventListener('click', () => {
+    reconocimiento.start();
+  });
+
+  reconocimiento.onresult = (e) => {
+    buscador.value = e.results[0][0].transcript;
+    buscador.dispatchEvent(new Event('input'));
+  };
+}
+
+Si el navegador permite reconocimiento de voz, lo activa al pulsar el micrófono.
+
+Al recibir resultado, lo inserta en el campo de búsqueda y lanza el filtrado.
+
+✅ Resumen general
+
+Este script maneja toda la lógica de:
+
+Registro y autenticación de usuarios
+
+Gestión del carrito
+
+Carga dinámica de productos
+
+Buscador y reconocimiento de voz
+
+Interacción con el DOM (mostrar u ocultar elementos)
+
+Persistencia local con localStorage
+

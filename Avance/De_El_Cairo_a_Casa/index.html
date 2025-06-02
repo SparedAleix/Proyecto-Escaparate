@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De El Cairo a Casa</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="cookie-banner" class="alert alert-dark text-center fixed-bottom" role="alert">
+    Este sitio usa cookies para mejorar la experiencia. <button id="accept-cookies" class="btn btn-sm btn-primary">Aceptar</button>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="img/logo.png" alt="Logo" class="logo-navbar me-2">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="#novedades">Novedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#catalogo">Catálogo</a></li>
+        </ul>
+        <form class="d-flex">
+          <input id="buscador" class="form-control me-2" type="search" placeholder="Buscar">
+          <button class="btn btn-outline-light" type="submit">🔍</button>
+          <button type="button" id="btn-voz" class="btn btn-outline-light ms-1">🎤</button>
+        </form>
+        <button id="usuario-logueado" class="btn btn-outline-light ms-2 d-none"></button>
+        <button id="btn-login" class="btn btn-outline-light ms-2" data-bs-toggle="modal" data-bs-target="#modalLogin">Iniciar sesión</button>
+        <a href="carrito.html" id="btn-carrito" class="btn btn-light ms-2">🛒 <span id="contador-carrito" class="badge bg-danger">0</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Modal de Perfil -->
+
+  <div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="modalPerfilLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalPerfilLabel">Mi Perfil</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p>Nombre de usuario: <strong id="nombre-usuario-perfil"></strong></p>
+          <p>(Este es un ejemplo. Aquí podrías añadir opciones para cambiar la contraseña, cerrar sesión, etc.)</p>
+          <button class="btn btn-secondary" onclick="cerrarSesion()">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Login -->
+
+  <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLoginLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLoginLabel">Iniciar sesión</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-login">
+            <div class="mb-3">
+              <label for="usuario" class="form-label">Usuario</label>
+              <input type="text" class="form-control" id="usuario" required>
+            </div>
+            <div class="mb-3">
+              <label for="clave" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="clave" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </form>
+          <p class="mt-3 text-center">¿No tienes cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#modalRegistro" data-bs-dismiss="modal">Regístrate aquí</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Registro -->
+
+  <div class="modal fade" id="modalRegistro" tabindex="-1" aria-labelledby="modalRegistroLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistroLabel">Crear una cuenta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="form-registro">
+            <div class="mb-3">
+              <label for="nuevoUsuario" class="form-label">Nombre de usuario</label>
+              <input type="text" class="form-control" id="nuevoUsuario" required>
+            </div>
+            <div class="mb-3">
+              <label for="nuevaClave" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="nuevaClave" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secciones dinámicas -->
+
+  <section id="novedades" class="container my-4">
+    <h2 class="text-center">Novedades</h2>
+    <div class="row" id="lista-novedades"></div>
+  </section>
+
+  <section id="catalogo" class="container my-4">
+    <h2 class="text-center">Todos nuestros productos</h2>
+    <div id="lista-productos" class="d-flex overflow-auto gap-3 py-3 px-2" style="scroll-snap-type: x mandatory;"></div>
+  </section>
+
+  <!-- Footer -->
+
+  <footer class="bg-dark text-light text-center py-3">
+    <p class="mb-1">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#modalPrivacidad">Política de privacidad</a> -
+      <a href="#" data-bs-toggle="modal" data-bs-target="#modalCookies">Política de cookies</a> -
+      <a href="#" data-bs-toggle="modal" data-bs-target="#modalConfigCookies">Configuración de cookies</a> -
+      <a href="#" data-bs-toggle="modal" data-bs-target="#modalAvisoLegal">Aviso legal</a> -
+      <a href="#" data-bs-toggle="modal" data-bs-target="#modalContacto">Contacto</a>
+    </p>
+    <small>&copy; 2025 De El Cairo a Casa</small>
+  </footer>
+
+  <!-- Modales legales -->
+   
+  <div class="modal fade" id="modalPrivacidad" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Política de Privacidad</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <p>Tu privacidad es importante para nosotros. No almacenamos datos personales reales, y solo se utiliza almacenamiento local para simular el inicio de sesión y el carrito.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCookies" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Política de Cookies</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <p>Este sitio utiliza cookies simuladas (mediante localStorage) para recordar tus preferencias y mantener tu sesión iniciada.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalConfigCookies" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Configuración de Cookies</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <p>Solo utilizamos cookies esenciales para simular la experiencia del usuario. No puedes desactivarlas en esta versión educativa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalAvisoLegal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Aviso Legal</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <p>Este proyecto es una simulación académica sin fines comerciales. No representa una tienda real ni recopila datos personales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalContacto" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Contacto</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <p>Para más información, escribe a: contacto@deelcairoacasa.com (simulado).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
